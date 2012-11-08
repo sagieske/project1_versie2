@@ -1,0 +1,8 @@
+Design Doc:
+
+Database:
+- Description: Type dish, type kitchen, 
+    ?maybe seperate fields?
+- Ingredients: Ingredients seperated by \n
+
+
