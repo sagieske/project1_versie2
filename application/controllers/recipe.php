@@ -26,16 +26,31 @@ class Recipe extends CI_Controller {
         
     }  
     
+    
+    public function rate($recipe) {
+        $rating = $this->input->post("rating");
+        $un = $this->session->userdata("username");
+        $correct = $this->Recipe_model->rate($un, $rating, $recipe);
+        return $correct;
+    }
+    
     /* Show one recipe */
     public function show($recipeID) {
-        $this->Recipe_model->set_viewed($recipeID);
+    
+        if ( isset($_POST['rating']) ) {
+	        $this->rate($recipeID); // This function does all the rating.
+	    }
+	    $rating = $this->Recipe_model->get_ratings( $recipeID );
+
+        $data['title'] = $this->Recipe_model->set_viewed($recipeID);
         $data['recipes'] = $this->Recipe_model->get_one($recipeID); 
-        $data['title'] = 'Recipe';
+        $data['rating'] = $rating;
+        $data['recipeID'] = $recipeID;
 
         $this->load->view('templates/header', $data);
         $this->load->view('pages/recipe', $data);
         $this->load->view('templates/footer', $data);
-    }   
+    }    
      
 }  
 ?>
