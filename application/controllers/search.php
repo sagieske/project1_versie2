@@ -7,7 +7,7 @@ class Search extends CI_Controller {
         parent::__construct();
         $this->load->library('session');
         $this->load->model('Recipe_model');
-
+        $this->load->model('User_model');
     }
 
     /*  Show searchpage

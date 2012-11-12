@@ -8,6 +8,7 @@ class Recipe extends CI_Controller {
         parent::__construct();
         $this->load->library('session');
         $this->load->model('Recipe_model');
+        $this->load->model('User_model');
     }
 
     public function index() {
@@ -30,7 +31,7 @@ class Recipe extends CI_Controller {
     public function rate($recipe) {
         $rating = $this->input->post("rating");
         $un = $this->session->userdata("username");
-        $correct = $this->Recipe_model->rate($un, $rating, $recipe);
+        $correct = $this->User_model->rate($un, $rating, $recipe);
         return $correct;
     }
     
@@ -43,7 +44,7 @@ class Recipe extends CI_Controller {
 	    $rating = $this->Recipe_model->get_ratings( $recipeID );
 
         $data['title'] = $this->Recipe_model->set_viewed($recipeID);
-        $data['recipes'] = $this->Recipe_model->get_one($recipeID); 
+        $data['recipes'] = $this->User_model->get_one($recipeID); 
         $data['rating'] = $rating;
         $data['recipeID'] = $recipeID;
 

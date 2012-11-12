@@ -7,7 +7,7 @@ class Lists extends CI_Controller {
         parent::__construct();
         $this->load->library('session');
         $this->load->model('Recipe_model');
-
+        $this->load->model('User_model');
     }
     
         
@@ -22,7 +22,7 @@ class Lists extends CI_Controller {
     }
     
     public function recently_viewed() {
-        $data['recipes'] = $this->Recipe_model->get_recently_viewed(); 
+        $data['recipes'] = $this->User_model->get_recently_viewed(); 
         $data['title'] = 'Recently Viewed';
 
         $this->load->view('templates/header', $data);

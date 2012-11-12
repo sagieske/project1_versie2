@@ -7,6 +7,7 @@ class Login extends CI_Controller {
         parent::__construct();
         $this->load->library('session');
         $this->load->model('Recipe_model');
+        $this->load->model('User_model');
 
     }
     public function index() {
@@ -39,7 +40,7 @@ class Login extends CI_Controller {
     public function login() {
         $un = $this->input->post("un");
         $pw = $this->input->post("pw");
-        $correct = $this->Recipe_model->login($un, $pw);
+        $correct = $this->User_model->login($un, $pw);
         if ( $correct ) {
             $newdata = array(
                    'username'  => $un,
@@ -52,7 +53,7 @@ class Login extends CI_Controller {
     public function signup() {
         $un = $this->input->post("un");
         $pw = $this->input->post("pw");
-        $correct = $this->Recipe_model->signup($un, $pw);
+        $correct = $this->User_model->signup($un, $pw);
         if ( $correct ) {
             $newdata = array(
                    'username'  => $un,
