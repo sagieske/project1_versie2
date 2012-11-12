@@ -3,15 +3,13 @@
 /*Controller for single recipe */
 class Recipe extends CI_Controller {
 
-/*
+
     public function __construct() {
         parent::__construct();
         $this->load->library('session');
         $this->load->model('Recipe_model');
-    }*/
-        $this->load->library('session');
-        $this->load->model('Recipe_model');
-        
+    }
+
     public function index() {
 
         if (!file_exists('../application/views/pages/home.php')) {
