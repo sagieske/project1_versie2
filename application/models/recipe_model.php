@@ -39,7 +39,7 @@ class Recipe_model extends CI_Model {
             $avgrating = $ratingstotal/$numberofratings;
         }
     
-        return ; //TODO
+        return $avgrating;
     }
         
     
