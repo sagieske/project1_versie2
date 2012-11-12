@@ -1,0 +1,7 @@
+CHMOD:
+
+find . -type f -name '*.html' -exec chmod 644 {} \;
+find . -type f -name '*.php' -exec chmod 644 {} \;
+find . -type f -name '*.htacces' -exec chmod 711 {} \;
+find . -type d -exec chmod 711 {} \;
+
