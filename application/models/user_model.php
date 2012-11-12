@@ -8,7 +8,7 @@ class User_model extends CI_Model {
         $users = $this->db->get_where('users',array('username' => $un))->result();
         foreach ( $users as $user ) {
         
-            if ( $pw == $user->password ) { return TRUE; }
+            if ( MD5($pw) == $user->password ) { return TRUE; }
         
         }
         return FALSE;
@@ -22,7 +22,7 @@ class User_model extends CI_Model {
         }
         $data = array(
             'username' => $un,
-            'password' => $pw
+            'password' => MD5($pw)
             // identifier => auto-increment
         );
         $this->db->insert('users', $data); 

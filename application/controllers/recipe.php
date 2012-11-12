@@ -43,7 +43,7 @@ class Recipe extends CI_Controller {
 	    }
 	    $rating = $this->Recipe_model->get_ratings( $recipeID );
 
-        $data['title'] = $this->Recipe_model->set_viewed($recipeID);
+        $data['title'] = $this->User_model->set_viewed($recipeID);
         $data['recipes'] = $this->User_model->get_one($recipeID); 
         $data['rating'] = $rating;
         $data['recipeID'] = $recipeID;
