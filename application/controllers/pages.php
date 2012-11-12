@@ -196,6 +196,13 @@ class Pages extends CI_Controller {
         $this->load->view('pages/logout', $data);
         $this->load->view('templates/footer', $data);    
     }
+    public function view_signup() {
+        $data['title'] = 'signup';
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('pages/signup', $data);
+        $this->load->view('templates/footer', $data);    
+    }
 	
 }
 

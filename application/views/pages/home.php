@@ -14,7 +14,7 @@
     </fieldset>
     </form>
     
-    <form action="signup" method="post" data-inline="true">
+    <form action="pages/view_signup" method="post" data-inline="true">
     <fieldset data-role="controlgroup" >
         <label for="explain">If you don't have an account yet, you can sign up right here:</label>
         <input type="submit" value="Sign up!" data-inline="true" id="login">
