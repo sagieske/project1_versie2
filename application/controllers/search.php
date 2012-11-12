@@ -3,12 +3,15 @@
 class Search extends CI_Controller {
 
 
+/*
     public function __construct() {
         parent::__construct();
         $this->load->library('session');
         $this->load->model('Recipe_model');
-
-    }
+    }*/
+        $this->load->library('session');
+        $this->load->model('Recipe_model');
+        
 
     /*  Show searchpage
     *   Get min/max values for sliders
