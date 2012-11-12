@@ -9,7 +9,7 @@
     <fieldset data-role="controlgroup" >
         <label for="explanation">And you can login now:</label>
         <input type="text" name="un" id="un">
-        <input type="text" name="pw" id="pw">
+        <input type="password" name="pw" id="pw">
         <input type="submit" value="Login!" data-inline="true" id="login">
     </fieldset>
     </form>
