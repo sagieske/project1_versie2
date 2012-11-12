@@ -2,9 +2,9 @@
     <div data-role="controlgroup" data-type="horizontal">
         <!-- Note these links don't work when at appstudio_project1/pages/ -->
         <a href="../../pages" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
-        <a href="../../pages/show_all" data-role="button" data-icon="grid" data-iconpos="notext">List</a>
-        <a href="../../pages/search" data-role="button" data-icon="search" data-iconpos="notext">Search</a>
-        <a href="../../pages/recently_viewed" data-role="button"  data-icon="star" data-iconpos="notext">Recently Viewed</a>
+        <a href="../../lists/show_all" data-role="button" data-icon="grid" data-iconpos="notext">List</a>
+        <a href="../../search" data-role="button" data-icon="search" data-iconpos="notext">Search</a>
+        <a href="../../lists/recently_viewed" data-role="button"  data-icon="star" data-iconpos="notext">Recently Viewed</a>
     </div>
 
 <?              
