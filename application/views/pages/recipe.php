@@ -1,7 +1,6 @@
 <?php
 
     $recipe = $recipes[0];
-    
 
     // Print all relevant information.
     echo "<h1> $recipe->name </h1>";
