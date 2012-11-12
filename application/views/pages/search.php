@@ -1,6 +1,6 @@
 <h3>Search for a recipe here.</h3>
 
-<form action="show_searched_recipes_text" method="get" data-inline="true">
+<form action="../search/show_searched_recipes_text" method="get" data-inline="true">
 <fieldset data-role="controlgroup" data-inline="true">
 	<legend>Search for:</legend>
 
@@ -25,14 +25,14 @@
 </form>
 
 <hr>
-<form action="show_searched_recipes_time" method="get" data-inline="true">
+<form action="../search/show_searched_recipes_time" method="get" data-inline="true">
     <label for="slider-time">Maximum time:</label>
     <input type="range" name="slider-time" id="slider-time"  step="5"/>
     <input type="submit" value="search" data-inline="true" id="timesearch">
 </form>
 
 <hr>
-<form action="show_searched_recipes_yield" method="get" data-inline="true">
+<form action="../search/show_searched_recipes_yield" method="get" data-inline="true">
     <label for="slider-yield">Maximum yield:</label>
     <input type="range" name="slider-yield" id="slider-yield"  step="1"/>
     <input type="submit" value="search" data-inline="true" id="yieldsearch">
