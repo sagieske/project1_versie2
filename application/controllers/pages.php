@@ -174,6 +174,29 @@ class Pages extends CI_Controller {
         $this->load->view('pages/list', $data);
         $this->load->view('templates/footer', $data);    
     }
+    
+    //If user has just signed up...
+    public function view_welcome() {
+        if ( isset($_POST['un']) ) {
+	    	$itworked = $this->signup(); // This function does all the work.
+	    }
+	    $data['title'] = 'welcome';
+
+        $this->load->view('templates/header', $data);
+        if ($itworked) {$this->load->view('pages/welcome',$data);}
+	    else {$this->load->view('pages/signup_error',$data);}
+        $this->load->view('templates/footer', $data);    
+    }
+    public function view_logout() {
+        $this->session->unset_userdata('username');
+	    $this->session->unset_userdata('logged_in');
+        $data['title'] = 'logout';
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('pages/logout', $data);
+        $this->load->view('templates/footer', $data);    
+    }
+	
 }
 
 ?>

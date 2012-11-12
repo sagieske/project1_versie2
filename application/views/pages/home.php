@@ -22,7 +22,7 @@
     </form>
     <? } else { ?>
     
-    <form action="logout" method="post" data-inline="true">
+    <form action="pages/view_logout" method="post" data-inline="true">
     <fieldset data-role="controlgroup" >
         <input type="submit" value="Logout!" data-inline="true" id="login">
     </fieldset>
