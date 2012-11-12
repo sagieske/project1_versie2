@@ -5,7 +5,7 @@
     <?
     $li = $this->session->userdata('logged_in');
     if ( !$li ) { ?>
-    <form action="home" method="post" data-inline="true">
+    <form action="pages" method="post" data-inline="true">
     <fieldset data-role="controlgroup" >
         <label for="explanation">And you can login now:</label>
         <input type="text" name="un" id="un">

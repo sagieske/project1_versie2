@@ -26,6 +26,11 @@ class Recipe_model extends CI_Model {
         return $this->db->order_by('recently_viewed.time', 'desc')->join('recipes', 'recipes.recipeID = recently_viewed.recipeID')->get('recently_viewed')->result();
     }
     
+    public function get_ratings( $recipe ) {
+        return $this->db->get_where('ratings',array('recipeID' => $recipe))->result();
+    }
+        
+    
     /*  Get_recently_viewed(0): Sets recipe to recently viewed, inserted in database
     **  Double instances will get updated timestamp
     **  TODO: Write delete function for database
@@ -99,6 +104,51 @@ class Recipe_model extends CI_Model {
         $this->db->select_max($type);
         $query = $this->db->get('recipes');
         return $query->result_array();
+    }
+    
+    public function login($un,$pw){
+        
+        $users = $this->db->get_where('users',array('username' => $un))->result();
+        foreach ( $users as $user ) {
+        
+            if ( $pw == $user->password ) { return TRUE; }
+        
+        }
+        return FALSE;
+        //(BTW, database gazes also into you, BE CAREFUL)
+    }
+    public function signup($un,$pw){
+        
+        $users = $this->db->get_where('users',array('username' => $un))->result();
+        foreach ( $users as $user ) {
+            return FALSE; // Checks for existing users with the same name
+        }
+        $data = array(
+            'username' => $un,
+            'password' => $pw
+            // identifier => auto-increment
+        );
+        $this->db->insert('users', $data); 
+        return TRUE;
+        
+    }
+    
+    
+    public function rate($un, $rating, $recipe) {
+        $existing = $this->db->get_where('ratings',array('username' => $un,
+                                                       'recipeID' => $recipe))->result();
+        foreach ( $existing as $e ) {
+            return FALSE; // Breaks on existing rating.
+        }
+        $data = array(
+            'username' => $un,
+            'recipeID' => $recipe,
+            'rating' => $rating
+            // identifier => auto-increment
+        );
+        $this->db->insert('ratings', $data); 
+        return TRUE;
+        
     }
 
 }

@@ -10,6 +10,46 @@ class Pages extends CI_Controller {
 
     }
     
+    public function logout() {
+        $this->session->set_userdata('logged_in', FALSE );
+        $this->session->set_userdata('username', '' );
+    }
+    
+    public function login() {
+        $un = $this->input->post("un");
+        $pw = $this->input->post("pw");
+        $correct = $this->Recipe_model->login($un, $pw);
+        if ( $correct ) {
+            $newdata = array(
+                   'username'  => $un,
+                   'logged_in' => TRUE
+            );
+            $this->session->set_userdata($newdata);
+        }
+        return $correct;
+    }
+    public function signup() {
+        $un = $this->input->post("un");
+        $pw = $this->input->post("pw");
+        $correct = $this->Recipe_model->signup($un, $pw);
+        if ( $correct ) {
+            $newdata = array(
+                   'username'  => $un,
+                   'logged_in' => TRUE
+            );
+            $this->session->set_userdata($newdata);
+        }
+        return $correct;
+    }
+    
+    public function rate($recipe) {
+        $rating = $this->input->post("rating");
+        $un = $this->session->userdata("username");
+        $correct = $this->Recipe_model->rate($un, $rating, $recipe);
+        return $correct;
+    }
+
+    
     public function index() {
 
         if (!file_exists('../application/views/pages/home.php')) {
@@ -18,6 +58,10 @@ class Pages extends CI_Controller {
         }
         //TODO: DELETE clear recently viewed
         $this->Recipe_model->clear_tables();
+        
+        if ( isset($_POST['un']) ) {
+	        $this->login(); // This function does all the work.
+	    }
         
         //$data['posts'] = $this->Recipe_model->get_latest();
         $data['title'] = 'Home';
