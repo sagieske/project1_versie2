@@ -27,7 +27,19 @@ class Recipe_model extends CI_Model {
     }
     
     public function get_ratings( $recipe ) {
-        return $this->db->get_where('ratings',array('recipeID' => $recipe))->result();
+        $ratings = $this->db->get_where('ratings',array('recipeID' => $recipe))->result();
+        
+        $numberofratings = 0; $ratingstotal = 0;
+        foreach( $ratings as $rating ) {
+            $numberofratings += 1;
+            $ratingstotal += $rating->rating;
+        }
+        $avgrating = -1; // This would mean there are no ratingz! (Typo but leaving it in)
+        if ( $numberofratings > 0 ) {
+            $avgrating = $ratingstotal/$numberofratings;
+        }
+    
+        return ; //TODO
     }
         
     

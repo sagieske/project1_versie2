@@ -84,12 +84,22 @@ class Pages extends CI_Controller {
     
     /* Show one recipe */
     public function show_recipe($recipeID) {
+    
+    
+        if ( isset($_POST['rating']) ) {
+	        $this->rate($arg); // This function does all the rating.
+	    }
+	    $ratings = $this->Recipe_model->get_ratings( $recipeID );
+    
+    
         $data['title'] = $this->Recipe_model->set_viewed($recipeID);
         $data['recipes'] = $this->Recipe_model->get_one($recipeID); 
-       //$data['title'] = 'Recipe';
+        $data['ratings'] = $ratings;
 
         $this->load->view('templates/header', $data);
+        
         $this->load->view('pages/recipe', $data);
+        
         $this->load->view('templates/footer', $data);
     }    
 
