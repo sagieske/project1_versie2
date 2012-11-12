@@ -4,7 +4,9 @@
 
     // Print all relevant information.
     echo "<h1> $recipe->name </h1>";
-    echo "Average rating: $rating";
+    if ($rating != -1) {
+        echo "Average rating: $rating";
+    }
     //TODO: INSERT PICTURE ON THIS SPOT
     echo "<p> <i>$recipe->description </i></p>";
     echo "<p> <b>TIME:</b> $recipe->time minutes.<br> <b>YIELD:</b> $recipe->yield. </p>";
