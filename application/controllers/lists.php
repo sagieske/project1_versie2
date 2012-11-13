@@ -22,12 +22,24 @@ class Lists extends CI_Controller {
     }
     
     public function recently_viewed() {
-        $data['recipes'] = $this->User_model->get_recently_viewed(); 
-        $data['title'] = 'Recently Viewed';
+         $data['recipes'] = $this->User_model->get_recently_viewed(); 
+         $data['title'] = 'Recently Viewed';
 
         $this->load->view('templates/header', $data);
         $this->load->view('pages/list', $data);
         $this->load->view('templates/footer', $data);    
     }
+    
+    public function show_favorites() {
+        $data['recipes'] = $this->User_model->get_favorites(); 
+        $data['title'] = 'Favorites';
+        
+        $this->load->view('templates/header', $data);
+        $this->load->view('pages/list', $data);
+        $this->load->view('templates/footer', $data);    
+    }
+    
+                  
+
 }  
 ?>

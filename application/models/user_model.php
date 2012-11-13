@@ -48,12 +48,12 @@ class User_model extends CI_Model {
         
     }
     
-    /*  Get_recently_viewed(0): Sets recipe to recently viewed, inserted in database
+    /*  Set_viewed(1): Sets recipe to recently viewed with username, inserted in database
     **  Double instances will get updated timestamp
     **  TODO: Write delete function for database
     */
     public function set_viewed($recipeID) { 
-        $result = $this->db->get_where('recipes',array('recipeID' => $recipeID));
+        $result = $this->db->get_where('recently_viewed',array('recipeID' => $recipeID));
         if (mysql_num_rows($result) == 0) {
             $data = array('recipeID' => $recipeID);
             $this->db->insert('recently_viewed', $data);
@@ -64,13 +64,36 @@ class User_model extends CI_Model {
         }
     }
     
-    /*  Get_recently_viewed(0): Retrieves recently viewed from databases
+    /*  Get_recently_viewed(0): Retrieves recently viewed from databases given with user
     **  join recently viewed recipeIDs with rest of information from recipestable
     */    
     public function get_recently_viewed(){
         return $this->db->order_by('recently_viewed.time', 'desc')->join('recipes', 'recipes.recipeID = recently_viewed.recipeID')->get('recently_viewed')->result();
     }
+
+    /*  Set_favorite(1): Sets recipe to recently viewed with username, inserted in database
+    **  Double instances will get updated timestamp
+    **  TODO: Write delete function for database
+    */
+    public function set_favorite($recipeID) { 
+        $result = $this->db->get_where('favorites',array('recipeID' => $recipeID));
+        if (mysql_num_rows($result) == 0) {
+            $data = array('recipeID' => $recipeID);
+            $this->db->insert('favorites', $data);
+            }
+        else{
+            $data = array('recipeID' => $recipeID);
+            $this->db->update('favorites', $data)->where('recipeID', $recipeID);            
+        }
+    }    
     
+    
+    /*  Get_Favorites(0): Retrieves favorites from databases
+    **  
+    */    
+    public function get_favorites(){
+        return $this->db->order_by('recipes.recipeID', 'asc')->join('recipes', 'recipes.recipeID = favorites.recipeID')->get('favorites')->result();
+    }
 }
 
 ?>

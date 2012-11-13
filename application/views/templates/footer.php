@@ -4,9 +4,9 @@
         <a href="../../login" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
         <a href="../../lists/show_all" data-role="button" data-icon="grid" data-iconpos="notext">List</a>
         <a href="../../search" data-role="button" data-icon="search" data-iconpos="notext">Search</a>
-        <a href="../../lists/recently_viewed" data-role="button"  data-icon="star" data-iconpos="notext">Recently Viewed</a>
+        <a href="../../lists/recently_viewed" data-role="button"  data-icon="gear" data-iconpos="notext">Recently Viewed</a>
+        <a href="../../lists/show_favorites" data-role="button"  data-icon="star" data-iconpos="notext">My Favorites</a>
     </div>
-
 <?              
                 //Login notification here: 
                 //echo '<P>';
