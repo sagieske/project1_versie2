@@ -52,23 +52,26 @@ class User_model extends CI_Model {
     **  Double instances will get updated timestamp
     **  TODO: Write delete function for database
     */
-    public function set_viewed($recipeID) { 
-        $result = $this->db->get_where('recently_viewed',array('recipeID' => $recipeID));
+    public function set_viewed($recipeID, $un) { 
+        $result = $this->db->get_where('recently_viewed',array('recipeID' => $recipeID, 'username' => $un));
         if (mysql_num_rows($result) == 0) {
-            $data = array('recipeID' => $recipeID);
+            $data = array('recipeID' => $recipeID, 'username' => $un);
             $this->db->insert('recently_viewed', $data);
             }
         else{
-            $data = array('recipeID' => $recipeID, 'time' => 'NOW()');
-            $this->db->update('recently_viewed', $data)->where('recipeID', $recipeID);            
+            $data = array('recipeID' => $recipeID, 'time' => 'NOW()', 'username' => $un);
+            $this->db->update('recently_viewed', $data)->where('recipeID', $recipeID);
         }
     }
     
     /*  Get_recently_viewed(0): Retrieves recently viewed from databases given with user
     **  join recently viewed recipeIDs with rest of information from recipestable
     */    
-    public function get_recently_viewed(){
-        return $this->db->order_by('recently_viewed.time', 'desc')->join('recipes', 'recipes.recipeID = recently_viewed.recipeID')->get('recently_viewed')->result();
+    public function get_recently_viewed($un){
+        $data = array('username' => $un);
+        return $this->db->order_by('recently_viewed.time', 'desc')
+            ->join('recipes', 'recipes.recipeID = recently_viewed.recipeID')
+            ->get_where('recently_viewed',array('username' => $un))->result();
     }
 
     /*  Set_favorite(1): Sets recipe to recently viewed with username, inserted in database

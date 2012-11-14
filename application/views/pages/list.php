@@ -1,6 +1,6 @@
 <?php
     if(empty($recipes)){
-        echo 'No results were found.';
+        echo '<h3>No results were found.</h3>';
     }
     else{
         foreach ($recipes as $recipe):

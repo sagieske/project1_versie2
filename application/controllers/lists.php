@@ -22,8 +22,12 @@ class Lists extends CI_Controller {
     }
     
     public function recently_viewed() {
-         $data['recipes'] = $this->User_model->get_recently_viewed(); 
-         $data['title'] = 'Recently Viewed';
+        $li = $this->session->userdata('logged_in');
+        if ($li) {
+            $un = $this->session->userdata('username');
+            $data['recipes'] = $this->User_model->get_recently_viewed($un);
+        }
+        $data['title'] = 'Recently Viewed';
 
         $this->load->view('templates/header', $data);
         $this->load->view('pages/list', $data);
