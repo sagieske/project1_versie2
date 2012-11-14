@@ -45,12 +45,12 @@ class Recipe extends CI_Controller {
         
         $li = $this->session->userdata('logged_in');
         if ($li) {
-            $data['title'] = $this->User_model->set_viewed($recipeID, $this->session->userdata('username'));
+            $this->User_model->set_viewed($recipeID, $this->session->userdata('username'));
         }
-        $data['title'] = 'RECIPE';
+        
+        $data['title'] = 'Recipe';
         $data['recipes'] = $this->Recipe_model->get_one($recipeID); 
         $data['rating'] = $rating;
-
         $data['recipeID'] = $recipeID;
 
         $this->load->view('templates/header', $data);

@@ -52,15 +52,11 @@ class User_model extends CI_Model {
     **  Double instances will get updated timestamp
     **  TODO: Write delete function for database
     */
-    public function set_viewed($recipeID, $un) { 
-        $result = $this->db->get_where('recently_viewed',array('recipeID' => $recipeID, 'username' => $un));
-        if (mysql_num_rows($result) == 0) {
-            $data = array('recipeID' => $recipeID, 'username' => $un);
+    public function set_viewed($recipeID, $un) {
+        $data = array('recipeID' => $recipeID, 'username' => $un);
+        $existing_entries = $this->db->get_where( 'recently_viewed', $data )->num_rows();
+        if ($existing_entries < 1 ) {
             $this->db->insert('recently_viewed', $data);
-            }
-        else{
-            $data = array('recipeID' => $recipeID, 'time' => 'NOW()', 'username' => $un);
-            $this->db->update('recently_viewed', $data)->where('recipeID', $recipeID);
         }
     }
     
