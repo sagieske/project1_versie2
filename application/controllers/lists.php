@@ -25,6 +25,10 @@ class Lists extends CI_Controller {
         $li = $this->session->userdata('logged_in');
         if ($li) {
             $un = $this->session->userdata('username');
+            
+            // At this point, delete non-recent data?
+            // $this->db->delete('mytable', array('username' => $un, 'time' => 'nonrecent?')); 
+            
             $data['recipes'] = $this->User_model->get_recently_viewed($un);
         }
         $data['title'] = 'Recently Viewed';

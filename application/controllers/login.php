@@ -16,8 +16,10 @@ class Login extends CI_Controller {
         // Whoops, we don't have a page for that!
             show_404();
         }
-
-        $this->Recipe_model->clear_tables();
+        
+        // OLD: Upon loading the login page, recently viewed recipes were cleared entirely.
+        //$this->Recipe_model->clear_tables();
+        // This should be done to select data and only when looking at the list itself.
         
         if ( isset($_POST['un']) ) {
 	        $this->login(); // This function does all the work.
