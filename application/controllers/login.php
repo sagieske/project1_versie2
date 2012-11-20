@@ -21,14 +21,19 @@ class Login extends CI_Controller {
         //$this->Recipe_model->clear_tables();
         // This should be done to select data and only when looking at the list itself.
         
+        $loginworked = TRUE;
         if ( isset($_POST['un']) ) {
-	        $this->login(); // This function does all the work.
+	        $loginworked = $this->login(); // This function does all the work.
 	    }
         
         $data['title'] = 'Home';
 
         $this->load->view('templates/header', $data);
-        $this->load->view('pages/home', $data);
+        if ( $loginworked ) {
+            $this->load->view('pages/home', $data);
+        } else {
+            $this->load->view('pages/login_error', $data);
+        }
         $this->load->view('templates/footer', $data);
         
     }
