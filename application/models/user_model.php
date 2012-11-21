@@ -60,8 +60,8 @@ class User_model extends CI_Model {
         }
     }
     
-    /*  Get_recently_viewed(0): Retrieves recently viewed from databases given with user
-    **  join recently viewed recipeIDs with rest of information from recipestable
+    /*  Get_recently_viewed(1): Retrieves recently viewed from databases given with user
+    **  join recently viewed recipeIDs with rest of information from recipes table
     */    
     public function get_recently_viewed($un){
         $data = array('username' => $un);
@@ -70,28 +70,32 @@ class User_model extends CI_Model {
             ->get_where('recently_viewed',array('username' => $un))->result();
     }
 
-    /*  Set_favorite(1): Sets recipe to recently viewed with username, inserted in database
-    **  Double instances will get updated timestamp
-    **  TODO: Write delete function for database
+    /*  Set_favorite(2): Sets recipe to favorite with username, inserted in database
     */
-    public function set_favorite($recipeID) { 
-        $result = $this->db->get_where('favorites',array('recipeID' => $recipeID));
-        if (mysql_num_rows($result) == 0) {
-            $data = array('recipeID' => $recipeID);
+    public function set_favorites($recipeID, $un) { 
+        $data = array('recipeID' => $recipeID, 'username' => $un);
+        $existing_entries = $this->db->get_where( 'favorites', $data )->num_rows();
+        if ($existing_entries < 1 ) {
             $this->db->insert('favorites', $data);
-            }
-        else{
-            $data = array('recipeID' => $recipeID);
-            $this->db->update('favorites', $data)->where('recipeID', $recipeID);            
         }
     }    
     
     
-    /*  Get_Favorites(0): Retrieves favorites from databases
-    **  
-    */    
-    public function get_favorites(){
-        return $this->db->order_by('recipes.recipeID', 'asc')->join('recipes', 'recipes.recipeID = favorites.recipeID')->get('favorites')->result();
+    /*  Get_favorites(1): Retrieves favorites from databases given with user
+    **  join favorites recipeIDs with rest of information from recipes table
+    */   
+    
+    public function get_favorites($un){
+        $data = array('username' => $un);
+        return $this->db->order_by('name', 'asc')
+            ->join('recipes', 'recipes.recipeID = favorites.recipeID')
+            ->get_where('favorites',array('username' => $un))->result();
+    }
+    
+     public function is_favorite($recipeID, $un){
+        $data = array('username' => $un, 'recipeID' => $recipeID);
+        $existing_entries = $this->db->get_where( 'favorites', $data )->num_rows();
+        return $existing_entries;
     }
 }
 

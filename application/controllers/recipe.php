@@ -35,6 +35,11 @@ class Recipe extends CI_Controller {
         return $correct;
     }
     
+    public function set_favorite($recipe) {
+        $un = $this->session->userdata("username");
+        $this->User_model->set_favorites($recipe, $un);
+    }
+    
     /* Show one recipe */
     public function show($recipeID) {
     
@@ -43,10 +48,12 @@ class Recipe extends CI_Controller {
 	    }
 	    $rating = $this->Recipe_model->get_ratings( $recipeID );
         
+       
         $li = $this->session->userdata('logged_in');
         if ($li) {
             $this->User_model->set_viewed($recipeID, $this->session->userdata('username'));
-        }
+            $data['isfav'] = $this->User_model->is_favorite($recipeID, $this->session->userdata('username'));
+        } 
         
         $data['title'] = 'Recipe';
         $data['recipes'] = $this->Recipe_model->get_one($recipeID); 

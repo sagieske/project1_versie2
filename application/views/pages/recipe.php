@@ -24,7 +24,25 @@
     $li = $this->session->userdata('logged_in');
         
     if ( $li ) {
-    
+        //Check if recipe is favorite
+        if ($isfav < 1 ){?>
+        <form <? echo 'action="'.$recipe->recipeID.'"' ?> method="post" data-inline="true">
+        <fieldset data-role="controlgroup" >
+            <label for="set_favorite">Set as favorite?</label>
+            <input type="submit" value="Fav!" data-inline="true" id="rate">
+        </fieldset>
+        </form>
+        
+        
+        <? } else{?>
+        <form <? echo 'action="'.$recipe->recipeID.'"' ?> method="post" data-inline="true">
+        <fieldset data-role="controlgroup" >
+            <label for="set_favorite">Set as favorite?</label>
+            <input type="submit" value="Fav!" data-inline="true" id="rate">
+        </fieldset>
+        </form>
+         <?}
+        
         // Look for existing ratings by this user:
         $un = $this->session->userdata("username");
         $existing = $this->db->get_where('ratings',array('username' => $un,
@@ -42,6 +60,8 @@
             <input type="submit" value="Rate!" data-inline="true" id="rate">
         </fieldset>
         </form>
+        
+        
     <? }
     }
 

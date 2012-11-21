@@ -39,8 +39,13 @@ class Lists extends CI_Controller {
     }
     
     public function show_favorites() {
-        $data['recipes'] = $this->User_model->get_favorites(); 
-        $data['title'] = 'Favorites';
+        $li = $this->session->userdata('logged_in');
+        if ($li) {
+            $un = $this->session->userdata('username');
+            
+            $data['recipes'] = $this->User_model->get_favorites($un);
+        }
+        $data['title'] = 'Recently Viewed';;
         
         $this->load->view('templates/header', $data);
         $this->load->view('pages/list', $data);
