@@ -97,6 +97,11 @@ class User_model extends CI_Model {
         $existing_entries = $this->db->get_where( 'favorites', $data )->num_rows();
         return $existing_entries;
     }
+    
+    public function delete_favorite($recipeID, $un){
+        $data = array('username' => $un, 'recipeID' => $recipeID);
+        $this->db->delete('favorites', $data); 
+    }
 }
 
 ?>

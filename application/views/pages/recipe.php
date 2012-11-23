@@ -24,23 +24,15 @@
     $li = $this->session->userdata('logged_in');
         
     if ( $li ) {
-        //Check if recipe is favorite
+        //Check if recipe is not a favorite
         if ($isfav < 1 ){?>
-        <form <? echo 'action="'.$recipe->recipeID.'"' ?> method="post" data-inline="true">
-        <fieldset data-role="controlgroup" >
-            <label for="set_favorite">Set as favorite?</label>
-            <input type="submit" value="Fav!" data-inline="true" id="rate">
-        </fieldset>
-        </form>
+            <a <? echo 'href="../../../recipe/favorite_setted/'.$recipe->recipeID.'"' ?> data-role="button" data-icon="home" >Set as Favorite</a>
         
         
-        <? } else{?>
-        <form <? echo 'action="'.$recipe->recipeID.'"' ?> method="post" data-inline="true">
-        <fieldset data-role="controlgroup" >
-            <label for="set_favorite">Set as favorite?</label>
-            <input type="submit" value="Fav!" data-inline="true" id="rate">
-        </fieldset>
-        </form>
+        <? } 
+        //Recipe is a favorite:
+        else{ ?>
+            <a <? echo 'href="../../../recipe/favorite_setted/'.$recipe->recipeID.'"' ?> data-role="button" data-icon="home" >Delete as Favorite</a>
          <?}
         
         // Look for existing ratings by this user:

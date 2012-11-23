@@ -35,9 +35,32 @@ class Recipe extends CI_Controller {
         return $correct;
     }
     
-    public function set_favorite($recipe) {
+    public function set_favorite($recipeID) {
         $un = $this->session->userdata("username");
-        $this->User_model->set_favorites($recipe, $un);
+        $this->User_model->set_favorites($recipeID, $un);
+    }
+    
+    public function delete_favorite($recipeID) {
+        $un = $this->session->userdata("username");
+        $this->User_model->delete_favorite($recipeID, $un);
+    }
+    
+    public function favorite_setted($recipeID) {
+        $data['title'] = ' ';
+        $data['recipes'] = $this->Recipe_model->get_one($recipeID); 
+        $un = $this->session->userdata("username");
+        $isfav = $this->User_model->is_favorite($recipeID,$un);
+        if($isfav < 1 ){
+            $this->User_model->set_favorites($recipeID, $un);
+            $data['set'] = 1;
+        } else{
+            $this->User_model->delete_favorite($recipeID, $un);
+            $data['set'] = 0;
+        }
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('pages/favset', $data);
+        $this->load->view('templates/footer', $data);
     }
     
     /* Show one recipe */
