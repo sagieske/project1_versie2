@@ -26,13 +26,13 @@
     if ( $li ) {
         //Check if recipe is not a favorite
         if ($isfav < 1 ){?>
-            <a <? echo 'href="../../../recipe/favorite_setted/'.$recipe->recipeID.'"' ?> data-role="button" data-icon="home" >Set as Favorite</a>
+            <a <? echo 'href="../../../recipe/favorite_setted/'.$recipe->recipeID.'"' ?> data-role="button" data-icon="star" >Set as Favorite</a>
         
         
         <? } 
         //Recipe is a favorite:
         else{ ?>
-            <a <? echo 'href="../../../recipe/favorite_setted/'.$recipe->recipeID.'"' ?> data-role="button" data-icon="home" >Delete as Favorite</a>
+            <a <? echo 'href="../../../recipe/favorite_setted/'.$recipe->recipeID.'"' ?> data-role="button" data-icon="star" >Delete as Favorite</a>
          <?}
         
         // Look for existing ratings by this user:
