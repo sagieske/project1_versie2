@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 30, 2012 at 08:37 AM
+-- Generation Time: Nov 30, 2012 at 09:24 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.3.16
 
@@ -48,19 +48,20 @@ INSERT INTO `favorites` (`recipeID`, `userID`, `username`) VALUES
 
 CREATE TABLE IF NOT EXISTS `ratings` (
   `username` varchar(50) COLLATE ascii_bin NOT NULL,
+  `userID` int(10) NOT NULL,
   `recipeID` int(10) NOT NULL,
   `rating` int(1) NOT NULL,
   `id` int(10) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `ratings`
 --
 
-INSERT INTO `ratings` (`username`, `recipeID`, `rating`, `id`) VALUES
-('example', 4, 7, 10);
+INSERT INTO `ratings` (`username`, `userID`, `recipeID`, `rating`, `id`) VALUES
+('example', 12, 8, 4, 12);
 
 -- --------------------------------------------------------
 

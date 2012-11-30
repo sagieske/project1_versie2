@@ -37,14 +37,15 @@ class User_model extends CI_Model {
         }
     }
     
-    public function rate($un, $rating, $recipe) {
-        $existing = $this->db->get_where('ratings',array('username' => $un,
+    public function rate($un, $uid, $rating, $recipe) {
+        $existing = $this->db->get_where('ratings',array('userID' => $uid,
                                                        'recipeID' => $recipe))->result();
         foreach ( $existing as $e ) {
             return FALSE; // Breaks on existing rating.
         }
         $data = array(
             'username' => $un,
+            'userID' => $uid,
             'recipeID' => $recipe,
             'rating' => $rating
             // identifier => auto-increment
