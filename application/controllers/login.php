@@ -48,9 +48,11 @@ class Login extends CI_Controller {
         $un = $this->input->post("un");
         $pw = $this->input->post("pw");
         $correct = $this->User_model->login($un, $pw);
+        $uid = $this->User_model->find_uid($un);
         if ( $correct ) {
             $newdata = array(
                    'username'  => $un,
+                   'userid' => $uid,
                    'logged_in' => TRUE
             );
             $this->session->set_userdata($newdata);
@@ -61,9 +63,11 @@ class Login extends CI_Controller {
         $un = $this->input->post("un");
         $pw = $this->input->post("pw");
         $correct = $this->User_model->signup($un, $pw);
+        $uid = $this->User_model->find_uid($un);
         if ( $correct ) {
             $newdata = array(
                    'username'  => $un,
+                   'userid' => $uid,
                    'logged_in' => TRUE
             );
             $this->session->set_userdata($newdata);

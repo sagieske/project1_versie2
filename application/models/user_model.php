@@ -29,7 +29,13 @@ class User_model extends CI_Model {
         return TRUE;
         
     }
-    
+    public function find_uid($un){
+        $users = $this->db->get_where('users',array('username' => $un))->result();
+        foreach ($users as $user)
+        {
+            return $user->identifier;
+        }
+    }
     
     public function rate($un, $rating, $recipe) {
         $existing = $this->db->get_where('ratings',array('username' => $un,
@@ -72,8 +78,8 @@ class User_model extends CI_Model {
 
     /*  Set_favorite(2): Sets recipe to favorite with username, inserted in database
     */
-    public function set_favorites($recipeID, $un) { 
-        $data = array('recipeID' => $recipeID, 'username' => $un);
+    public function set_favorites($recipeID, $un, $uid) { 
+        $data = array('recipeID' => $recipeID, 'username' => $un, 'userID' => $uid);
         $existing_entries = $this->db->get_where( 'favorites', $data )->num_rows();
         if ($existing_entries < 1 ) {
             $this->db->insert('favorites', $data);

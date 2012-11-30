@@ -36,25 +36,26 @@ class Recipe extends CI_Controller {
     }
     
     public function set_favorite($recipeID) {
-        $un = $this->session->userdata("username");
-        $this->User_model->set_favorites($recipeID, $un);
+        $uid = $this->session->userdata("userID");
+        $this->User_model->set_favorites($recipeID, $un, $uid);
     }
     
     public function delete_favorite($recipeID) {
-        $un = $this->session->userdata("username");
-        $this->User_model->delete_favorite($recipeID, $un);
+        $uid = $this->session->userdata("userID");
+        $this->User_model->delete_favorite($recipeID, $un, $uid);
     }
     
     public function favorite_setted($recipeID) {
         $data['title'] = ' ';
         $data['recipes'] = $this->Recipe_model->get_one($recipeID); 
         $un = $this->session->userdata("username");
+        $uid = $this->User_model->find_uid($un);
         $isfav = $this->User_model->is_favorite($recipeID,$un);
         if($isfav < 1 ){
-            $this->User_model->set_favorites($recipeID, $un);
+            $this->User_model->set_favorites($recipeID, $un, $uid);
             $data['set'] = 1;
         } else{
-            $this->User_model->delete_favorite($recipeID, $un);
+            $this->User_model->delete_favorite($recipeID, $un,$uid);
             $data['set'] = 0;
         }
 
