@@ -73,15 +73,17 @@ CREATE TABLE IF NOT EXISTS `recently_viewed` (
   `recipeID` int(20) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `username` varchar(20) COLLATE ascii_bin NOT NULL,
+  `userID` int(10) NOT NULL,
   KEY `time` (`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
 
 --
 -- Dumping data for table `recently_viewed`
 --
 
-INSERT INTO `recently_viewed` (`recipeID`, `time`, `username`) VALUES
-(4, '2012-11-30 13:36:13', 'example');
+INSERT INTO `recently_viewed` (`recipeID`, `time`, `username`, `userID`) VALUES
+(4, '2012-11-30 13:36:13', 'example',  '12');
 
 -- --------------------------------------------------------
 
