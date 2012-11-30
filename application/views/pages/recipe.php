@@ -8,7 +8,7 @@
     if ($rating != -1) {
         echo "Average rating: $rating";
     }
-    //TODO: INSERT PICTURE ON THIS SPOT
+
     echo "<p> <i>$recipe->description </i></p>";
     echo "<p> <b>TIME:</b> $recipe->time minutes.<br> <b>YIELD:</b> $recipe->yield. </p>";
     
@@ -25,6 +25,7 @@
         
     if ( $li ) {
         //Check if recipe is not a favorite
+
         if ($isfav < 1 ){?>
             <a <? echo 'href="../../../recipe/favorite_setted/'.$recipe->recipeID.'"' ?> data-role="button" data-icon="star" >Set as Favorite</a>
         
@@ -34,6 +35,8 @@
         else{ ?>
             <a <? echo 'href="../../../recipe/favorite_setted/'.$recipe->recipeID.'"' ?> data-role="button" data-icon="star" >Delete as Favorite</a>
          <?}
+        
+
         
         // Look for existing ratings by this user:
         $un = $this->session->userdata("username");
