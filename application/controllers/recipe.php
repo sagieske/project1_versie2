@@ -75,7 +75,7 @@ class Recipe extends CI_Controller {
        
         $li = $this->session->userdata('logged_in');
         if ($li) {
-            $this->User_model->set_viewed($recipeID, $this->session->userdata('username'));
+            $data['recent'] = $this->User_model->set_viewed($recipeID, $this->session->userdata('username'));
             $data['isfav'] = $this->User_model->is_favorite($recipeID, $this->session->userdata('username'));
         } 
         

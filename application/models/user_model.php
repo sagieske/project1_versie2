@@ -63,6 +63,10 @@ class User_model extends CI_Model {
         $existing_entries = $this->db->get_where( 'recently_viewed', $data )->num_rows();
         if ($existing_entries < 1 ) {
             $this->db->insert('recently_viewed', $data);
+        }else{
+            $this->db->delete('recently_viewed', $data);
+            $this->db->insert('recently_viewed', $data);
+           
         }
     }
     
