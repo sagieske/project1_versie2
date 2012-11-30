@@ -62,6 +62,8 @@ class Login extends CI_Controller {
     public function signup() {
         $un = $this->input->post("un");
         $pw = $this->input->post("pw");
+        $pw2 = $this->input->post("backuppw");
+        if ( $pw != $pw2 ) { return FALSE; }
         $correct = $this->User_model->signup($un, $pw);
         $uid = $this->User_model->find_uid($un);
         if ( $correct ) {
