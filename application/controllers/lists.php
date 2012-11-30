@@ -30,7 +30,8 @@ class Lists extends CI_Controller {
         $li = $this->session->userdata('logged_in');
         if ($li) {
             $un = $this->session->userdata('username');
-            $data['recipes'] = $this->User_model->get_recently_viewed($un);
+            $uid = $this->User_model->find_uid($un);
+            $data['recipes'] = $this->User_model->get_recently_viewed($un, $uid);
             $this->load->view('pages/list', $data);
         }else{
             $this->load->view('pages/needlogin', $data);
@@ -48,8 +49,8 @@ class Lists extends CI_Controller {
         $li = $this->session->userdata('logged_in');        
         if ($li) {
             $un = $this->session->userdata('username');
-            
-            $data['recipes'] = $this->User_model->get_favorites($un);
+            $uid = $this->User_model->find_uid($un);
+            $data['recipes'] = $this->User_model->get_favorites($un, $uid);
             $this->load->view('pages/list', $data);
         }else{
             $this->load->view('pages/needlogin', $data);

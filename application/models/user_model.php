@@ -59,8 +59,8 @@ class User_model extends CI_Model {
     **  Double instances will get updated timestamp
     **  TODO: Write delete function for database
     */
-    public function set_viewed($recipeID, $un) {
-        $data = array('recipeID' => $recipeID, 'username' => $un);
+    public function set_viewed($recipeID, $un, $uid) {
+        $data = array('recipeID' => $recipeID, 'username' => $un, 'userID' => $uid);
         $existing_entries = $this->db->get_where( 'recently_viewed', $data )->num_rows();
         if ($existing_entries < 1 ) {
             $this->db->insert('recently_viewed', $data);
@@ -74,11 +74,11 @@ class User_model extends CI_Model {
     /*  Get_recently_viewed(1): Retrieves recently viewed from databases given with user
     **  join recently viewed recipeIDs with rest of information from recipes table
     */    
-    public function get_recently_viewed($un){
-        $data = array('username' => $un);
+    public function get_recently_viewed($un, $uid){
+        $data = array('username' => $un, 'userID' => $uid);
         return $this->db->order_by('recently_viewed.time', 'desc')
             ->join('recipes', 'recipes.recipeID = recently_viewed.recipeID')
-            ->get_where('recently_viewed',array('username' => $un))->result();
+            ->get_where('recently_viewed', $data)->result();
     }
 
     /*  Set_favorite(2): Sets recipe to favorite with username, inserted in database
@@ -96,21 +96,21 @@ class User_model extends CI_Model {
     **  join favorites recipeIDs with rest of information from recipes table
     */   
     
-    public function get_favorites($un){
-        $data = array('username' => $un);
+    public function get_favorites($un, $uid){
+        $data = array('username' => $un, 'userID' => $uid);
         return $this->db->order_by('name', 'asc')
             ->join('recipes', 'recipes.recipeID = favorites.recipeID')
-            ->get_where('favorites',array('username' => $un))->result();
+            ->get_where('favorites', $data)->result();
     }
     
-     public function is_favorite($recipeID, $un){
-        $data = array('username' => $un, 'recipeID' => $recipeID);
+     public function is_favorite($recipeID, $un, $uid){
+        $data = array('username' => $un, 'recipeID' => $recipeID, 'userID' => $uid);
         $existing_entries = $this->db->get_where( 'favorites', $data )->num_rows();
         return $existing_entries;
     }
     
-    public function delete_favorite($recipeID, $un){
-        $data = array('username' => $un, 'recipeID' => $recipeID);
+    public function delete_favorite($recipeID, $un, $uid){
+        $data = array('username' => $un, 'recipeID' => $recipeID, 'userID' => $uid);
         $this->db->delete('favorites', $data); 
     }
 }

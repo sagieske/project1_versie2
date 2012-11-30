@@ -35,7 +35,7 @@ class Recipe extends CI_Controller {
         $correct = $this->User_model->rate($un, $uid, $rating, $recipe);
         return $correct;
     }
-    
+    /*
     public function set_favorite($recipeID) {
         $uid = $this->session->userdata("userID");
         $this->User_model->set_favorites($recipeID, $un, $uid);
@@ -45,13 +45,13 @@ class Recipe extends CI_Controller {
         $uid = $this->session->userdata("userID");
         $this->User_model->delete_favorite($recipeID, $un, $uid);
     }
-    
+    */
     public function favorite_setted($recipeID) {
         $data['title'] = ' ';
         $data['recipes'] = $this->Recipe_model->get_one($recipeID); 
         $un = $this->session->userdata("username");
         $uid = $this->User_model->find_uid($un);
-        $isfav = $this->User_model->is_favorite($recipeID,$un);
+        $isfav = $this->User_model->is_favorite($recipeID,$un, $uid);
         if($isfav < 1 ){
             $this->User_model->set_favorites($recipeID, $un, $uid);
             $data['set'] = 1;
@@ -76,8 +76,10 @@ class Recipe extends CI_Controller {
        
         $li = $this->session->userdata('logged_in');
         if ($li) {
-            $data['recent'] = $this->User_model->set_viewed($recipeID, $this->session->userdata('username'));
-            $data['isfav'] = $this->User_model->is_favorite($recipeID, $this->session->userdata('username'));
+            $un =  $this->session->userdata('username');
+            $uid = $this->User_model->find_uid($un);
+            $data['recent'] = $this->User_model->set_viewed($recipeID, $un, $uid);
+            $data['isfav'] = $this->User_model->is_favorite($recipeID, $un, $uid);
         } 
         
         $data['title'] = 'Recipe';
