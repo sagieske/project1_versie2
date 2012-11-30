@@ -31,7 +31,8 @@ class Recipe extends CI_Controller {
     public function rate($recipe) {
         $rating = $this->input->post("rating");
         $un = $this->session->userdata("username");
-        $correct = $this->User_model->rate($un, $rating, $recipe);
+        $uid = $this->session->userdata("userid");
+        $correct = $this->User_model->rate($un, $uid, $rating, $recipe);
         return $correct;
     }
     
